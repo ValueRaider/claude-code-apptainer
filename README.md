@@ -1,34 +1,65 @@
-# claude-code-apptainer
-Stop letting Claude Code rawdog your data. Put it in a container.
+# Stop letting Claude Code rawdog your data. 
 
+Put it in a container sandbox, with its own persistent home and tmp folders.
 
-## Step 1: build the containers
+## Build the containers
 
 Separated to allow quicker rebuilds / updates.
 
-### Build Fedora base
 ```bash
+# Fedora base:
 apptainer build fedora.sif fedora.def
-```
 
-### Install Claude code
-
-MCP configs are installed into /opt
-
-```bash
+# Install Claude code
 apptainer build fedora-claude.sif fedora-claude.def
-```
+# MCP configs are installed into /opt/claude-mcp-templates/
 
-### Install your dev and productivity tools
-
-```bash
+# Install your dev and productivity tools
 apptainer build fedora-claude-pkgs.sif fedora-claude-pkgs.def
 ```
 
-## Step 2:
+## Configure
 
 Modify top of `run.sh` if you want to enable different MCP servers.
 
-## Step 3:
+## Run
 
 Go into folder with work, run `path/to/claude-code-container/run.sh`
+
+Claude Code can only see this folder.
+
+```
+$ cd ~/Tmp
+ 
+$ ~/Claude/run.sh            
+sending incremental file list
+
+sent 123 bytes  received 13 bytes  272.00 bytes/sec
+total size is 193  speedup is 1.42
+Initializing project MCP config with servers: memory
+Apptainer> ls ~/
+Tmp
+
+Apptainer> claude
+                                                                                                        
+╭─── Claude Code v2.1.19 ──────────────────────────────────────────────────────────────────────────────╮
+...
+```
+
+## Aftermath
+
+Persistence means Claude has memory.
+
+```
+$ ls ./.claude/
+settings.local.json
+
+$ ls -a ./.claude-workdir    
+home  tmp  var_tmp
+
+$ ls -a ./.claude-workdir/home                  
+.bash_history  .cache  .claude  .claude.json  .claude.json.backup  Documents  .npm  .ssh
+
+$ ls -a ./.claude-workdir/tmp    
+node-compile-cache
+```
