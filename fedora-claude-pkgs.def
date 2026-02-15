@@ -1,5 +1,5 @@
 Bootstrap: localimage
-From: /home/gonzo/Claude/fedora-claude.sif
+From: ~/Claude/fedora-claude.sif
 
 %post
     dnf -y update

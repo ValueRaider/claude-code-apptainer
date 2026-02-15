@@ -1,5 +1,5 @@
 Bootstrap: localimage
-From: /home/gonzo/Claude/fedora.sif
+From: ~/Claude/fedora.sif
 
 %files
     ./MCPs/filesystem.json /opt/claude-mcp-templates/filesystem.json

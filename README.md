@@ -20,7 +20,7 @@ apptainer build fedora-claude-pkgs.sif fedora-claude-pkgs.def
 
 ## Configure
 
-Modify top of `run.sh` if you want to enable different MCP servers.
+Modify top of `run.sh` to set container path, and enable/disable MCP servers.
 
 ## Run
 
