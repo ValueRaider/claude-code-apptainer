@@ -2,10 +2,10 @@ Bootstrap: localimage
 From: /home/gonzo/Claude/fedora.sif
 
 %files
-    ~/Claude/Files/filesystem.json /opt/claude-mcp-templates/filesystem.json
-    ~/Claude/Files/memory.json.j2 /opt/claude-mcp-templates/memory.json.j2
-    ~/Claude/Files/thinking.json /opt/claude-mcp-templates/thinking.json
-    ~/Claude/Files/playwright.json /opt/claude-mcp-templates/playwright.json
+    ./MCPs/filesystem.json /opt/claude-mcp-templates/filesystem.json
+    ./MCPs/memory.json.j2 /opt/claude-mcp-templates/memory.json.j2
+    ./MCPs/thinking.json /opt/claude-mcp-templates/thinking.json
+    ./MCPs/playwright.json /opt/claude-mcp-templates/playwright.json
 
 %post
     dnf -y update
