@@ -1,0 +1,4 @@
+"filesystem": {
+  "command": "mcp-server-filesystem",
+  "args": ["/tmp"]
+}

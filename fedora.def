@@ -1,0 +1,7 @@
+Bootstrap: docker
+From: fedora:latest
+
+%post
+    dnf -y update
+
+    dnf clean all

@@ -1,0 +1,33 @@
+Bootstrap: localimage
+From: /home/gonzo/Claude/fedora.sif
+
+%files
+    ~/Claude/Files/filesystem.json /opt/claude-mcp-templates/filesystem.json
+    ~/Claude/Files/memory.json.j2 /opt/claude-mcp-templates/memory.json.j2
+    ~/Claude/Files/thinking.json /opt/claude-mcp-templates/thinking.json
+    ~/Claude/Files/playwright.json /opt/claude-mcp-templates/playwright.json
+
+%post
+    dnf -y update
+    
+    dnf install -y nodejs npm
+    npm install -g @anthropic-ai/claude-code
+
+    # MCP servers (only currently supported packages)
+    npm install -g @modelcontextprotocol/server-filesystem
+    npm install -g @modelcontextprotocol/server-memory
+    npm install -g @modelcontextprotocol/server-sequential-thinking
+    npm install -g @playwright/mcp
+
+    # Create MCP server config templates
+    mkdir -p /opt/claude-mcp-templates
+
+    dnf install -y chromium-browser
+
+    dnf clean all
+
+%environment
+    export PATH=/usr/local/bin:$PATH
+
+%runscript
+    exec claude "$@"

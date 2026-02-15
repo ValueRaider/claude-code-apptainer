@@ -1,0 +1,16 @@
+Bootstrap: localimage
+From: /home/gonzo/Claude/fedora-claude.sif
+
+%post
+    dnf -y update
+
+    # Software:
+    dnf -y install python3 python3-pip
+    dnf -y install make which g++ cmake gdb
+    dnf -y install rustc cargo golang
+    dnf -y install curl fd-find git glow gzip jq ripgrep tar tree unzip wget zip
+
+    # Sysadmin:
+    dnf install -y iproute
+
+    dnf clean all
